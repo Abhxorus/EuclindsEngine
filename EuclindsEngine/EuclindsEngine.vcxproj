@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
+    <ClCompile Include="src\maincpp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BaseApp.h" />
+    <ClInclude Include="include\Prerequisitos.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -88,7 +96,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
@@ -108,7 +116,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -129,7 +137,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
     </ClCompile>
     <Link>
@@ -149,7 +157,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./include/;C:\Users\hytal\OneDrive\Documentos\Euclinds\EuclindsEngine\ThirdParties\SFML-2.6.1\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -162,9 +170,6 @@
       <ImportLibrary>$(SolutionDir)/lib/$(PlatformTarget)/$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="maincpp.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
