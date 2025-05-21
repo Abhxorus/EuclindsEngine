@@ -15,7 +15,6 @@ int BaseApp::run()
 
     while (m_window->isOpen())
     {
-        HandleEvents();
         Update();
         render();
     }
@@ -26,7 +25,7 @@ int BaseApp::run()
 
 bool BaseApp::init()
 {
-    m_window = new sf::RenderWindow(sf::VideoMode(1000, 800), "Euclinds Engine");
+    m_window = new Window(1920, 1080, "Euclinds Engine");
     m_circle = new sf::CircleShape(100.0f);//inicializamos el puntero
     m_circle->setFillColor(sf::Color::Magenta);//le damos informacion al puntero
     m_circle->setPosition(200.f, 150.f);
@@ -46,19 +45,7 @@ void BaseApp::render()
 
 void BaseApp::destroy()
 {
-    delete m_window;
     delete m_circle;//destruimos el circulo
+    m_window->destroy();
 }
 
-void BaseApp::HandleEvents()
-{
-    sf::Event event;
-    while (m_window->pollEvent(event))
-    {
-        //cerrar la ventana si el usuario lo indica
-        if (event.type == sf::Event::Closed)
-        {
-            m_window->close();
-        }
-    }
-}

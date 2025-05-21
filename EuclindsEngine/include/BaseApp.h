@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Prerequisitos.h"
+#include "window.h"
 
 class BaseApp
 {
@@ -19,11 +20,10 @@ public:
 
 	void destroy();
 
-	void HandleEvents();
-
 	void Update();
 
 private:
-	sf::RenderWindow* m_window;
+	Window* m_window;
+	//sf::RenderWindow* m_window;
 	sf::CircleShape* m_circle;//creamos el puntero
 };
