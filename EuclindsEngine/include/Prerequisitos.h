@@ -1,18 +1,23 @@
 #pragma once
-//Librerias STD
+
+// Librerias STD
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <vector>
 #include <thread>
 #include <map>
-#include <fstream>
+#include <fstream> 
 #include <unordered_map>
 
-//Thrid Parties
+// Third Parties
 #include <SFML/Graphics.hpp>
+#include "Memory\TSharedPointer.h"
+#include "Memory\TWeakPointer.h"
+#include "Memory\TStaticPtr.h"
+#include "Memory\TUniquePtr.h"
 
-//Imgui
+// Imgui
 
 // MACRO for safe release of resources
 #define SAFE_PTR_RELEASE(x) if(x != nullptr) { delete x; x = nullptr; }
@@ -34,11 +39,12 @@
     exit(1);                                                      \
 }
 
-enum ShapeType
-{
+// ENUMS
+enum
+    ShapeType {
     EMPTY = 0,
     CIRCLE = 1,
     RECTANGLE = 2,
     TRIANGLE = 3,
-    POLYGON = 4
+    POLYGON = 4,
 };

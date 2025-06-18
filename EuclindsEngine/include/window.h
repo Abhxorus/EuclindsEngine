@@ -1,26 +1,33 @@
 #pragma once
 #include "Prerequisitos.h"
 
-class Window
-{
+class
+	Window {
 public:
 	Window() = default;
 	Window(int width, int height, const std::string& title);
 	~Window();
 
-	void HandleEvents();
+	void
+		handleEvents();
 
-	bool isOpen() const;
+	bool
+		isOpen() const;
 
-	void clear(const sf::Color& color = sf::Color(0, 0, 0, 255));
+	void
+		clear(const sf::Color& color = sf::Color(0, 0, 0, 255));
 
-	void draw(const sf::Drawable& drawable, const sf::RenderStates& states = sf::RenderStates::Default);
+	void
+		draw(const sf::Drawable& drawable,
+			const sf::RenderStates& states = sf::RenderStates::Default);
 
-	void display();
+	void
+		display();
 
-	void destroy();
-
+	void
+		destroy();
 private:
-	sf::RenderWindow* m_window;
+	EngineUtilities::TUniquePtr<sf::RenderWindow> m_windowPtr;
+	//sf::RenderWindow* m_window;
 	sf::View m_view;
 };
