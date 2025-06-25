@@ -48,6 +48,9 @@ BaseApp::update() {
 
 void
 BaseApp::render() {
+	if (!m_windowPtr) {
+		return;
+	}
 	m_windowPtr->clear();
 	if (m_shapePtr) {
 		m_shapePtr->render(m_windowPtr);
