@@ -22,6 +22,9 @@
     <Filter Include="Archivos de origen\ECS">
       <UniqueIdentifier>{2e2f5adb-4006-4900-8106-f717c3baa8b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{57d4ba0d-5b3b-493b-8430-aec723d9d6a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\maincpp.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="src\ECS\Actor.cpp">
       <Filter>Archivos de origen\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="CVector2.cpp">
+      <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="CVector2.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

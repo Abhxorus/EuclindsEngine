@@ -18,3 +18,18 @@ void
 Actor::render(const EngineUtilities::TSharedPointer<Window>& window) {
 
 }
+
+void
+Actor::start() {
+
+}
+
+void
+Actor::update(float deltaTime) {
+
+}
+
+void
+Actor::destroy() {
+
+}

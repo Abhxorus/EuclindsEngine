@@ -6,7 +6,6 @@ CShape::createShape(ShapeType type) {
     m_shapeType = type;
     switch (type) {
     case ShapeType::CIRCLE: {
-        // Creamos un CircleShape y lo “bajamos” a sf::Shape
         auto circleSP = EngineUtilities::MakeShared<sf::CircleShape>(10.f);
         circleSP->setFillColor(sf::Color::White);
         m_shapePtr = circleSP.dynamic_pointer_cast<sf::Shape>();
@@ -44,12 +43,23 @@ CShape::createShape(ShapeType type) {
         return;
     }
 }
+void
+CShape::start() {
+}
+
+void
+CShape::update(float deltaTime) {
+}
 
 void
 CShape::render(const EngineUtilities::TSharedPointer<Window>& window) {
     if (m_shapePtr) {
         window->draw(*m_shapePtr);
     }
+}
+
+void CShape::destroy() {
+    m_shapePtr.reset();
 }
 
 void CShape::setPosition(float x, float y) {

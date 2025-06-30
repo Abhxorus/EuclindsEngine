@@ -29,7 +29,7 @@ public:
     const sf::Vector2f& getScale() const { return m_scale; }
 
     // Métodos sobrescritos de Component
-    void start(float deltaTime) override {}
+    void start() override {}
     void update(float deltaTime) override {}
     void render(const EngineUtilities::TSharedPointer<Window>& window) override {}
     void destroy() override {}

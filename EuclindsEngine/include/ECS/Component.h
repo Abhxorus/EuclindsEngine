@@ -52,7 +52,7 @@ public:
 	 * @return true si la inicialización fue exitosa, false en caso contrario.
 	 */
 	virtual void
-		start(float deltaTime) = 0;
+		start() = 0;
 
 	/**
 	 * @brief Método virtual puro para actualizar el componente.
