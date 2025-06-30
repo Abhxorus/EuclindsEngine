@@ -42,7 +42,7 @@
     <ClCompile Include="src\ECS\Actor.cpp">
       <Filter>Archivos de origen\ECS</Filter>
     </ClCompile>
-    <ClCompile Include="CVector2.cpp">
+    <ClCompile Include="include\Utilities\CVector2.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClInclude Include="Transform.h">
       <Filter>ECS</Filter>
     </ClInclude>
-    <ClInclude Include="CVector2.h">
+    <ClInclude Include="include\Utilities\CVector2.h">
       <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
