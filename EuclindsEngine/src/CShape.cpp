@@ -81,3 +81,12 @@ void CShape::setScale(const sf::Vector2f& scale) {
     if (m_shapePtr) m_shapePtr->setScale(scale);
     else ERROR("CShape", "setScale", "Shape no inicializado");
 }
+
+void CShape::setPosition(const sf::Vector2f& position) {
+    if (m_shapePtr) {
+        m_shapePtr->setPosition(position);
+    }
+    else {
+        ERROR("CShape", "setPosition (vector)", "Shape no inicializado");
+    }
+}

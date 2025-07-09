@@ -86,5 +86,11 @@
     <ClInclude Include="include\Utilities\CVector2.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="CVector3.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="CVector4.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

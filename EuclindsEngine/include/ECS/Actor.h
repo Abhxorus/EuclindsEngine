@@ -2,6 +2,7 @@
 #include "../Prerequisitos.h"
 #include "Entity.h"
 #include "CShape.h"
+#include "../Transform.h"
 
 class Actor : Entity
 {

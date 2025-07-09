@@ -2,6 +2,8 @@
 #include "Prerequisitos.h"
 #include "Window.h"
 #include "CShape.h"
+#include "ECS/Actor.h"
+
 class
 	BaseApp {
 public:
@@ -31,5 +33,7 @@ public:
 private:
 	EngineUtilities::TSharedPointer<Window> m_windowPtr;
 
-	EngineUtilities::TSharedPointer<CShape>   m_shapePtr;
+	EngineUtilities::TSharedPointer<CShape> m_shapePtr;
+
+	EngineUtilities::TSharedPointer<Actor> m_ACircle;
 };

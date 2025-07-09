@@ -27,6 +27,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CVector3.h" />
+    <ClInclude Include="CVector4.h" />
     <ClInclude Include="include\BaseApp.h" />
     <ClInclude Include="include\CShape.h" />
     <ClInclude Include="include\ECS\Actor.h" />
