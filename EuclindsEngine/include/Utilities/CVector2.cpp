@@ -1,11 +1,11 @@
 #include "CVector2.h"
 
 // Constructores
-CVector2::CVector2() : x(0.f), y(0.f) {}
-CVector2::CVector2(float xVal, float yVal) : x(xVal), y(yVal) {}
+CVector2D::CVector2D() : x(0.f), y(0.f) {}
+CVector2D::CVector2D(float xVal, float yVal) : x(xVal), y(yVal) {}
 
 // Operadores
-CVector2 CVector2::operator+(const CVector2& other) const {
+CVector2D CVector2D::operator+(const CVector2& other) const {
     return CVector2(x + other.x, y + other.y);
 }
 CVector2 CVector2::operator-(const CVector2& other) const {
