@@ -68,7 +68,7 @@ public:
 			float deltaTime,
 			float range) {
 		sf::Vector2f direction = targetPosition - m_position;
-		float length = EngineMathLib::sqrt(direction.x * direction.x + direction.y * direction.y);
+		float length = CVector2::sqrt(direction.x * direction.x + direction.y * direction.y);
 
 		if (length > range) {
 			direction /= length;  // Normaliza el vector
