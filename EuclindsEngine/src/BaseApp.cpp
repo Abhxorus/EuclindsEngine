@@ -53,7 +53,16 @@ BaseApp::init() {
 void
 BaseApp::update() {
 	if (!m_ACircle.isNull()) {
-		m_ACircle->update(0);
+		//m_ACircle->update(0);
+
+		// obtener el componente transform del actor
+		auto tranform = m_ACircle->getComponent<Transform>();
+		if (tranform.isNull())
+		{
+			return;
+		}
+
+		sf::Vector2f;
 	}
 }
 
@@ -71,6 +80,5 @@ BaseApp::render() {
 
 void
 BaseApp::destroy() {
-	//m_shapePtr.reset();
-	//m_window->destroy();
 }
+

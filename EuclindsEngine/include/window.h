@@ -22,6 +22,9 @@ public:
 			const sf::RenderStates& states = sf::RenderStates::Default);
 
 	void
+		update();
+
+	void
 		display();
 
 	void
@@ -30,4 +33,7 @@ private:
 	EngineUtilities::TUniquePtr<sf::RenderWindow> m_windowPtr;
 	//sf::RenderWindow* m_window;
 	sf::View m_view;
+public:
+	sf::Time deltaTime;
+	sf::Clock clock;
 };

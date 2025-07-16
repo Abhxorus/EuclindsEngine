@@ -39,3 +39,25 @@ private:
     sf::Vector2f m_rotation;
     sf::Vector2f m_scale;
 };
+
+void
+seek(const sf::Vector2f& targetPosition,
+    float speed,
+    float deltaTime,
+    float range)
+{
+    sf::Vector2f direction = targetPosition - position;
+    float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (length > range)
+    {
+        direction /= length;
+        position += direction * speed * deltaTime;
+    }
+}
+
+void
+setPosition(const sf::Vector2f& _position)
+{
+    position = _position;
+}
