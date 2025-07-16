@@ -1,4 +1,5 @@
 #include "BaseApp.h"
+#include <ECS/Actor.h>
 
 BaseApp::~BaseApp() {
 }
@@ -23,7 +24,8 @@ BaseApp::run() {
 
 bool
 BaseApp::init() {
-	m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "Labrid Engine");
+	m_windowPtr = EngineUtilities
+		::MakeShared<Window>(1920, 1080, "VektorCoreEngine");
 	if (!m_windowPtr) {
 		ERROR("BaseApp",
 			"init",
@@ -31,14 +33,6 @@ BaseApp::init() {
 		return false;
 	}
 
-	// Create a circle shape
-	m_shapePtr = EngineUtilities::MakeShared<CShape>();
-	if (m_shapePtr)
-	{
-		m_shapePtr->createShape(ShapeType::CIRCLE);
-		m_shapePtr->setFillColor(sf::Color::Green);
-		m_shapePtr->setPosition(200.f, 150.f);
-	}
 
 	//circle actor
 	m_ACircle = EngineUtilities::MakeShared<Actor>("Circle Actor");
@@ -48,24 +42,26 @@ BaseApp::init() {
 		m_ACircle->getComponent<Transform>()->setPosition(sf::Vector2(100.f, 150.f));
 	}
 	return true;
+
 }
 
 void
 BaseApp::update() {
-	if (!m_ACircle.isNull()) {
-		//m_ACircle->update(0);
+	if (!m_windowPtr.isNull()) {
+		m_windowPtr->update();
+	}
 
-		// obtener el componente transform del actor
-		auto tranform = m_ACircle->getComponent<Transform>();
-		if (tranform.isNull())
-		{
-			return;
-		}
+	if (!m_ACircle.isNull()) {
+		m_ACircle->update(m_windowPtr->deltaTime.asSeconds());
 
 		sf::Vector2f targetPos(1200.f, 150.f);
 
-		m_ACircle->getComponent<Transform>()->seek(targetPos, 200.0f, m_windowPtr->deltaTime.asSeconds(), 10.0f);
+		m_ACircle->getComponent<Transform>()
+			->seek(targetPos, 100.f, m_windowPtr->deltaTime.asSeconds(), 10.f);
 	}
+
+
+
 }
 
 void
@@ -77,10 +73,14 @@ BaseApp::render() {
 	if (m_shapePtr) {
 		m_shapePtr->render(m_windowPtr);
 	}
+	if (m_ACircle) {
+		m_ACircle->render(m_windowPtr);
+	}
 	m_windowPtr->display();
+
+
 }
 
 void
 BaseApp::destroy() {
 }
-

@@ -1,12 +1,12 @@
 #include "window.h"
 
 Window::Window(int width, int height, const std::string& title) {
-	// Inicializar la ventana
-	m_windowPtr = EngineUtilities::MakeUnique<sf::RenderWindow>(sf::VideoMode(width, height), title);
-	//m_window = new sf::RenderWindow(sf::VideoMode(width, height), title);
+
+	m_windowPtr = EngineUtilities
+		::MakeUnique<sf::RenderWindow>(sf::VideoMode(width, height), title);
 
 	if (!m_windowPtr.isNull()) {
-		m_windowPtr->setFramerateLimit(60); // Limitar a 60 FPS
+		m_windowPtr->setFramerateLimit(60);
 		MESSAGE("Window", "Window", "Window created successfully");
 	}
 	else {
@@ -16,14 +16,12 @@ Window::Window(int width, int height, const std::string& title) {
 
 Window::~Window() {
 	m_windowPtr.release();
-	//SAFE_PTR_RELEASE(m_window);
 }
 
 void
 Window::handleEvents() {
 	sf::Event event;
 	while (m_windowPtr->pollEvent(event)) {
-		// Cerrar la ventana si el usuario lo indica
 		if (event.type == sf::Event::Closed) {
 			m_windowPtr->close();
 		}
@@ -32,7 +30,6 @@ Window::handleEvents() {
 
 bool
 Window::isOpen() const {
-	// Check that window is not null
 	if (!m_windowPtr.isNull()) {
 		return m_windowPtr->isOpen();
 	}
@@ -73,13 +70,11 @@ Window::display() {
 }
 
 void
-Window::update()
-{
-	deltaTime = clock.restart();
+Window::update() {
+	deltaTime = m_clock.restart();
 }
 
 void
 Window::destroy() {
 	m_windowPtr.release();
-	//SAFE_PTR_RELEASE(m_window);
 }
