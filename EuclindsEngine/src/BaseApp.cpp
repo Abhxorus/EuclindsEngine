@@ -62,7 +62,9 @@ BaseApp::update() {
 			return;
 		}
 
-		sf::Vector2f;
+		sf::Vector2f targetPos(1200.f, 150.f);
+
+		m_ACircle->getComponent<Transform>()->seek(targetPos, 200.0f, m_windowPtr->deltaTime.asSeconds(), 10.0f);
 	}
 }
 
