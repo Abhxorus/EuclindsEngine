@@ -1,8 +1,9 @@
 #pragma once
+
 #include "../Prerequisitos.h"
 #include "Entity.h"
 #include "CShape.h"
-#include "../Transform.h"
+#include "../ECS/Transform.h"
 
 /**
  * @class Actor
@@ -70,6 +71,9 @@ public:
 	 */
 	void
 		destroy() override;
+
+	void
+		setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
 
 	/**
 	 * @brief Retrieves the first component of type T attached to the actor.

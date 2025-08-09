@@ -25,6 +25,9 @@
     <Filter Include="Utilities">
       <UniqueIdentifier>{57d4ba0d-5b3b-493b-8430-aec723d9d6a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Imgui">
+      <UniqueIdentifier>{1371e3f8-b55d-44c7-961f-485052c66561}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\maincpp.cpp">
@@ -40,6 +43,33 @@
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="src\ECS\Actor.cpp">
+      <Filter>Archivos de origen\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineGUI.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourceManager.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_demo.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_draw.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_tables.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_widgets.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML.cpp">
+      <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="A_Racer.cpp">
       <Filter>Archivos de origen\ECS</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,16 +98,10 @@
     <ClInclude Include="include\Memory\TWeakPointer.h">
       <Filter>Memory</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\Component.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
     <ClInclude Include="include\ECS\Entity.h">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="include\ECS\Actor.h">
-      <Filter>ECS</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\CVector2.h">
@@ -87,6 +111,54 @@
       <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\CVector4.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineGUI.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\Component.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\Texture.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\Transform.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResourceManager.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imconfig.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imgui.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imgui_internal.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imstb_rectpack.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imstb_textedit.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-1.92.1\imstb_truetype.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-3.0\imconfig-SFML.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML_export.h">
+      <Filter>Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\A_Racer.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utilities\EngineMath.h">
       <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>

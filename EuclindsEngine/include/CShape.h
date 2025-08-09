@@ -1,6 +1,7 @@
 #pragma once
 #include "Prerequisitos.h"
-#include "ECS\Component.h"
+#include "ECS/Component.h"
+#include "ECS/Texture.h"
 
 class
 	Window;
@@ -110,6 +111,9 @@ public:
 	 */
 	void
 		setScale(const sf::Vector2f& scl);
+
+	void
+		setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
 
 private:
 	EngineUtilities::TSharedPointer<sf::Shape>

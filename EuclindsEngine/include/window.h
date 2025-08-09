@@ -1,6 +1,8 @@
 #pragma once
 #include "Prerequisitos.h"
 
+class
+	EngineGUI;
 /**
  * @class Window
  * @brief Manages an SFML window instance for rendering and input handling.
@@ -72,6 +74,9 @@ public:
 	void
 		update();
 
+	void
+		render();
+
 	/**
 	 * @brief Destroys the window and releases resources.
 	 *
@@ -81,13 +86,12 @@ public:
 		destroy();
 
 private:
-	EngineUtilities::TUniquePtr
-		<sf::RenderWindow> m_windowPtr; ///< Unique pointer to the SFML RenderWindow.
-
 	sf::View
 		m_view; ///< Current view used for rendering.
 public:
 	sf::Time deltaTime; ///< Time elapsed since the last frame.
 	sf::Clock
 		m_clock; ///< Clock to measure time between frames.
+	EngineUtilities::TUniquePtr
+		<sf::RenderWindow> m_windowPtr; ///< Unique pointer to the SFML RenderWindow.
 };

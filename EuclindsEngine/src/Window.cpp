@@ -2,8 +2,12 @@
 
 Window::Window(int width, int height, const std::string& title) {
 
-	m_windowPtr = EngineUtilities
-		::MakeUnique<sf::RenderWindow>(sf::VideoMode(width, height), title);
+	m_windowPtr = EngineUtilities::MakeUnique<sf::RenderWindow>(
+		sf::VideoMode({ static_cast<unsigned int>(width),
+										static_cast<unsigned int>(height) }),
+		title,
+		sf::Style::Default
+	);
 
 	if (!m_windowPtr.isNull()) {
 		m_windowPtr->setFramerateLimit(60);
@@ -12,19 +16,24 @@ Window::Window(int width, int height, const std::string& title) {
 	else {
 		ERROR("Window", "Window", "Failed to create window");
 	}
+
+	ImGui::SFML::Init(*m_windowPtr);
 }
 
 Window::~Window() {
 	m_windowPtr.release();
+	ImGui::SFML::Shutdown();
 }
 
 void
 Window::handleEvents() {
-	sf::Event event;
-	while (m_windowPtr->pollEvent(event)) {
-		if (event.type == sf::Event::Closed) {
+
+	while (const std::optional event = m_windowPtr->pollEvent())
+	{
+		ImGui::SFML::ProcessEvent(*m_windowPtr, *event);
+		// Close window: exit
+		if (event->is<sf::Event::Closed>())
 			m_windowPtr->close();
-		}
 	}
 }
 
@@ -72,9 +81,17 @@ Window::display() {
 void
 Window::update() {
 	deltaTime = m_clock.restart();
+
+	ImGui::SFML::Update(*m_windowPtr, deltaTime);
+}
+
+void
+Window::render() {
+	ImGui::SFML::Render(*m_windowPtr);
 }
 
 void
 Window::destroy() {
 	m_windowPtr.release();
+	ImGui::SFML::Shutdown();
 }
