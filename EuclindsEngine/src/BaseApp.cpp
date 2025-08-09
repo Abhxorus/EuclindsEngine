@@ -26,7 +26,7 @@ int BaseApp::run() {
 bool BaseApp::init() {
     ResourceManager& resourceMan = ResourceManager::getInstance();
 
-    m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "DreamEngine");
+    m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "EuclidsEngine");
     if (!m_windowPtr) {
         ERROR("BaseApp", "init", "Failed to create window pointer, check memory allocation");
         return false;
