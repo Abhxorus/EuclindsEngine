@@ -1,5 +1,5 @@
 #pragma once
-#include "Prerequisitos.h"
+#include "../Prerequisitos.h"
 #include "Component.h"
 
 class

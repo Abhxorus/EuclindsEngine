@@ -2,7 +2,7 @@
 
 #include "../Prerequisitos.h"
 #include "Entity.h"
-#include "CShape.h"
+#include "Cshape.h"
 #include "../ECS/Transform.h"
 
 /**
@@ -74,6 +74,10 @@ public:
 
 	void
 		setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
+
+	const std::string&
+		getName() const { return m_name; }
+
 
 	/**
 	 * @brief Retrieves the first component of type T attached to the actor.

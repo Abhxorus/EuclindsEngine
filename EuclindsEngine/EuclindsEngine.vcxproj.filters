@@ -28,6 +28,18 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{1371e3f8-b55d-44c7-961f-485052c66561}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Circuits">
+      <UniqueIdentifier>{cac0cd00-9205-4d9e-a6a6-a600533b05cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{a87477c0-0df4-400b-a1df-118e7769f48b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{1fc1215f-47ce-4109-b818-61e46b17f899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de origen\Systems">
+      <UniqueIdentifier>{184ec4ee-e27d-43ac-a751-6991a410191e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\maincpp.cpp">
@@ -72,6 +84,18 @@
     <ClCompile Include="A_Racer.cpp">
       <Filter>Archivos de origen\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="include\ActorSerializer.cpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\PlayerInputSystem.cpp">
+      <Filter>Archivos de origen\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\RaceSystem.cpp">
+      <Filter>Archivos de origen\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Systems\SteeringSystem.cpp">
+      <Filter>Archivos de origen\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Prerequisitos.h">
@@ -112,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="include\Utilities\CVector4.h">
       <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineGUI.h">
-      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="include\ECS\Component.h">
       <Filter>ECS</Filter>
@@ -160,6 +181,39 @@
     </ClInclude>
     <ClInclude Include="include\Utilities\EngineMath.h">
       <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EngineGUI.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ECS\A_Player.h">
+      <Filter>ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Circuits\Circuit1.h">
+      <Filter>Circuits</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\RaceCountdown.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Components\lapComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\PlayerInputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\RaceSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\SteeringSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\WaypointFollowSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Systems\WaypointManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ActorSerializer.h">
+      <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

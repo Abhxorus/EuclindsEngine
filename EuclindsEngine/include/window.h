@@ -38,7 +38,7 @@ public:
 	 * This function should be called every frame to ensure window responsiveness.
 	 */
 	void
-		handleEvents();
+		handleEvents(EngineGUI& engineGUI);
 
 	/**
 	 * @brief Checks if the window is currently open.

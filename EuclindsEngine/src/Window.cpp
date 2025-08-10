@@ -1,4 +1,6 @@
 #include "window.h"
+#include "EngineGUI.h"
+
 
 Window::Window(int width, int height, const std::string& title) {
 
@@ -16,21 +18,19 @@ Window::Window(int width, int height, const std::string& title) {
 	else {
 		ERROR("Window", "Window", "Failed to create window");
 	}
-
-	ImGui::SFML::Init(*m_windowPtr);
 }
 
 Window::~Window() {
 	m_windowPtr.release();
-	ImGui::SFML::Shutdown();
 }
 
 void
-Window::handleEvents() {
+Window::handleEvents(EngineGUI& engineGUI) {
 
 	while (const std::optional event = m_windowPtr->pollEvent())
 	{
-		ImGui::SFML::ProcessEvent(*m_windowPtr, *event);
+
+		engineGUI.processEvent(*m_windowPtr, *event);
 		// Close window: exit
 		if (event->is<sf::Event::Closed>())
 			m_windowPtr->close();
@@ -81,17 +81,13 @@ Window::display() {
 void
 Window::update() {
 	deltaTime = m_clock.restart();
-
-	ImGui::SFML::Update(*m_windowPtr, deltaTime);
 }
 
 void
 Window::render() {
-	ImGui::SFML::Render(*m_windowPtr);
 }
 
 void
 Window::destroy() {
 	m_windowPtr.release();
-	ImGui::SFML::Shutdown();
 }

@@ -115,6 +115,8 @@ public:
 	void
 		setTexture(const EngineUtilities::TSharedPointer<Texture>& texture);
 
+	EngineUtilities::TSharedPointer<sf::Shape> getShapePtr() { return m_shapePtr; }
+
 private:
 	EngineUtilities::TSharedPointer<sf::Shape>
 		m_shapePtr; ///< Shared pointer to the SFML shape instance.
@@ -124,4 +126,7 @@ private:
 
 	sf::VertexArray*
 		m_line; ///< Pointer for line rendering (optional).
+
+
+
 };
