@@ -29,7 +29,7 @@ bool
 BaseApp::init() {
     ResourceManager& resourceMan = ResourceManager::getInstance();
 
-    m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "VektorCoreEngine");
+    m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "EuclindsEngine");
     if (m_windowPtr.isNull()) {
         ERROR("BaseApp", "init", "Failed to create window pointer.");
         return false;

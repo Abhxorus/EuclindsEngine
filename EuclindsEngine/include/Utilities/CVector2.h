@@ -1,6 +1,7 @@
 #pragma once
 #include "../Utilities/EngineMath.h"
 #include <ostream>
+#include <SFML/System/Vector2.hpp>
 
 namespace EngineMathLib
 {
@@ -17,7 +18,14 @@ namespace EngineMathLib
         static sf::Vector2f cVector2ToSF(const CVector2& v) {
             return sf::Vector2f(v.x, v.y);
         }
+        static CVector2 sfToCVector2(const sf::Vector2f& v) {
+            return CVector2(v.x, v.y);
+        }
 
+        
+        operator sf::Vector2f() const {
+            return sf::Vector2f(x, y);
+        }
         /**
          * @brief Default constructor, initializes vector to (0,0).
          */
