@@ -1,17 +1,31 @@
 ﻿#include "BaseApp.h"
 #include "ResourceManager.h"
 #include "ActorPicker.h"
-#include "ActorSerializer.h"          /* save/load actors */
+#include "ActorSerializer.h"
 
 /* circuit provider lives outside BaseApp */
-#include "Circuits/Circuit1.h"        /* getCircuitWaypoints() */
+#include "Circuits/Circuit1.h"
 
+/**
+ * @brief Destructor for the BaseApp class.
+ *
+ * This destructor ensures that any resources tied to the BaseApp instance
+ * are properly released upon its destruction.
+ */
 BaseApp::~BaseApp() {}
 
-int
-BaseApp::run() {
+/**
+ * @brief The main application loop.
+ *
+ * This function handles the application's core lifecycle: initialization,
+ * the main event loop, and final resource destruction.
+ *
+ * @return An integer representing the application's exit code.
+ */
+int BaseApp::run() {
     if (!init()) {
         ERROR("BaseApp", "run", "Initialization failed.");
+        return -1; // Added a proper error return value.
     }
 
     while (m_windowPtr->isOpen()) {
@@ -25,8 +39,15 @@ BaseApp::run() {
     return 0;
 }
 
-bool
-BaseApp::init() {
+/**
+ * @brief Initializes the application and its main components.
+ *
+ * This function sets up the window, the GUI, and creates the main
+ * game actors (player, track, and NPC).
+ *
+ * @return true if initialization is successful, false otherwise.
+ */
+bool BaseApp::init() {
     ResourceManager& resourceMan = ResourceManager::getInstance();
 
     m_windowPtr = EngineUtilities::MakeShared<Window>(1920, 1080, "EuclindsEngine");
@@ -39,6 +60,7 @@ BaseApp::init() {
 
     /* --- Create main actors (player, track, NPC) --- */
 
+    // Initialize track actor
     m_ATrack = EngineUtilities::MakeShared<Actor>("Track Actor");
     if (m_ATrack) {
         m_ATrack->getComponent<CShape>()->createShape(RECTANGLE);
@@ -51,7 +73,7 @@ BaseApp::init() {
         m_ATrack->setTexture(resourceMan.getTexture("sprites/Track"));
     }
 
-    /* --- Player (independent; Direct or TargetSeek control) --- */
+    // Initialize player actor
     m_player = EngineUtilities::MakeShared<A_Player>("Player");
     if (m_player) {
         m_player->getComponent<CShape>()->createShape(CIRCLE);
@@ -71,7 +93,7 @@ BaseApp::init() {
         m_player->setTexture(resourceMan.getTexture("sprites/mushroom"));
     }
 
-    /* --- NPC (A_Racer) --- */
+    // Initialize NPC racer
     m_racerNPC = EngineUtilities::MakeShared<A_Racer>("NPC_1");
     if (m_racerNPC) {
         m_racerNPC->getComponent<CShape>()->createShape(CIRCLE);
@@ -89,12 +111,14 @@ BaseApp::init() {
         m_racerNPC->setPosition(EngineMathLib::CVector2(855.f, 855.f));
     }
     m_npcs.clear();
-    if (!m_racerNPC.isNull()) m_npcs.push_back(m_racerNPC);
+    if (!m_racerNPC.isNull()) {
+        m_npcs.push_back(m_racerNPC);
+    }
 
     /* --- Waypoints --- */
     m_waypoints = getCircuitWaypoints();
 
-    /* --- Systems --- */
+    /* --- Systems initialization --- */
     {
         PlayerInputConfig pic;
         pic.player = m_player;
@@ -131,8 +155,12 @@ BaseApp::init() {
     {
         RaceConfig rc;
         rc.actors.clear();
-        if (!m_player.isNull())   rc.actors.push_back(m_player);
-        for (auto& npc : m_npcs)  rc.actors.push_back(npc);
+        if (!m_player.isNull()) {
+            rc.actors.push_back(m_player);
+        }
+        for (auto& npc : m_npcs) {
+            rc.actors.push_back(npc);
+        }
         rc.waypoints = &m_waypoints;
         rc.checkpointRadius = 12.f;
         m_raceSystem = EngineUtilities::MakeUnique<RaceSystem>(rc);
@@ -144,16 +172,21 @@ BaseApp::init() {
     m_raceLive = false;
     m_raceFinished = false;
     m_finalPlace = -1;
-    m_npcFinished = false; /* NEW */
+    m_npcFinished = false;
 
     return true;
 }
 
-void
-BaseApp::update() {
-    if (!m_windowPtr.isNull()) {
-        m_windowPtr->update();
-    }
+/**
+ * @brief Updates the state of the game logic.
+ *
+ * This function is called once per frame. It manages the race countdown,
+ * enforces speed limits, and updates the various game systems.
+ */
+void BaseApp::update() {
+    if (m_windowPtr.isNull()) return;
+
+    m_windowPtr->update();
     const float dt = m_windowPtr->deltaTime.asSeconds();
 
     /* --- Race countdown gate --- */
@@ -168,14 +201,14 @@ BaseApp::update() {
             if (!m_racerNPC.isNull()) {
                 m_racerNPC->enableSteering(true);
             }
-            /* activar cronometraje en GO */
+            /* activate timing on GO */
             if (!m_raceSystem.isNull()) {
                 m_raceSystem->setTimingActive(true);
             }
         }
     }
 
-    /* enforce player speed and NPC handicap every frame */
+    /* Enforce player speed and NPC handicap every frame */
     if (!m_player.isNull()) {
         float playerMax = m_player->getMaxSpeed();
         if (playerMax <= 0.f) playerMax = m_sharedMaxSpeed;
@@ -184,8 +217,6 @@ BaseApp::update() {
         if (!m_racerNPC.isNull()) {
             float npcMax = playerMax * m_npcSpeedFactor; /* a tad slower than player */
             m_racerNPC->setSpeed(npcMax);                /* WaypointFollow may lower more in corners */
-            /* if A_Racer has setMaxSpeed, keep both aligned */
-            /* m_racerNPC->setMaxSpeed(npcMax); */
         }
     }
 
@@ -198,10 +229,11 @@ BaseApp::update() {
 
     if (!m_raceSystem.isNull()) { m_raceSystem->update(dt); }
 
-    /* --- detect finish (3 laps) --- */
+    /* --- Detect finish (3 laps) --- */
     if (!m_raceFinished && !m_raceSystem.isNull()) {
         int playerLap = m_raceSystem->getLapData(0).lap;
         int npcLap = (m_raceSystem->getLapData(1).lap);
+
         if (!m_npcFinished && npcLap >= m_lapsToWin) {
             m_npcFinished = true;
             if (!m_racerNPC.isNull()) {
@@ -209,6 +241,7 @@ BaseApp::update() {
                 m_racerNPC->setSpeed(0.f);
             }
         }
+
         if (playerLap >= m_lapsToWin) {
             m_raceFinished = true;
             m_raceLive = false; /* freeze */
@@ -224,15 +257,15 @@ BaseApp::update() {
     }
 
     /* --- Update all actors EVERY frame --- */
-    if (!m_ATrack.isNull())    m_ATrack->update(dt);
-    if (!m_player.isNull())    m_player->update(dt);
-    if (!m_racerNPC.isNull())  m_racerNPC->update(dt);
+    if (!m_ATrack.isNull()) m_ATrack->update(dt);
+    if (!m_player.isNull()) m_player->update(dt);
+    if (!m_racerNPC.isNull()) m_racerNPC->update(dt);
 
     /* --- Prepare actors vector for GUI panels --- */
     actorsVector.clear();
-    if (!m_ATrack.isNull())    actorsVector.push_back(m_ATrack);
-    if (!m_player.isNull())    actorsVector.push_back(m_player);
-    if (!m_racerNPC.isNull())  actorsVector.push_back(m_racerNPC);
+    if (!m_ATrack.isNull()) actorsVector.push_back(m_ATrack);
+    if (!m_player.isNull()) actorsVector.push_back(m_player);
+    if (!m_racerNPC.isNull()) actorsVector.push_back(m_racerNPC);
 
     /* --- Panels: Menu, Hierarchy, Inspector, Console, FileManager --- */
     m_engineGUI.menuBar();
@@ -278,7 +311,7 @@ BaseApp::update() {
         }
 
         int lapHUD_real = m_raceSystem->getLapData(0).lap;
-        int lapHUD = lapHUD_real + 1;  /* VISUAL: arranca en 1 */
+        int lapHUD = lapHUD_real + 1; /* VISUAL: starts at 1 */
 
         /* format helper mm:ss.cc */
         auto fmt = [](float sec) -> std::string {
@@ -292,7 +325,7 @@ BaseApp::update() {
             return std::string(buf);
             };
 
-        float bestLap = m_raceSystem->getPlayerBestLapTime();   /* -1 si no hay aún */
+        float bestLap = m_raceSystem->getPlayerBestLapTime();  /* -1 if not yet set */
         float currLap = m_raceSystem->getPlayerCurrentLapTime();
 
         ImGui::SetNextWindowBgAlpha(0.3f);
@@ -346,15 +379,21 @@ BaseApp::update() {
     }
 }
 
-void
-BaseApp::render() {
+/**
+ * @brief Renders the game scene and GUI elements.
+ *
+ * This function clears the window, draws all actors, renders
+ * the GUI, and displays the final frame.
+ */
+void BaseApp::render() {
     if (m_windowPtr.isNull()) return;
+
     m_windowPtr->clear();
 
     /* --- Draw scene actors --- */
-    if (m_ATrack)    m_ATrack->getComponent<CShape>()->render(m_windowPtr);
-    if (m_player)    m_player->getComponent<CShape>()->render(m_windowPtr);
-    if (m_racerNPC)  m_racerNPC->getComponent<CShape>()->render(m_windowPtr);
+    if (m_ATrack) m_ATrack->getComponent<CShape>()->render(m_windowPtr);
+    if (m_player) m_player->getComponent<CShape>()->render(m_windowPtr);
+    if (m_racerNPC) m_racerNPC->getComponent<CShape>()->render(m_windowPtr);
 
     /* --- Draw outline for selected actor --- */
     m_engineGUI.drawSelectedOutline(m_windowPtr->m_windowPtr.get(), actorsVector);
@@ -365,15 +404,21 @@ BaseApp::render() {
     m_windowPtr->display();
 }
 
-void
-BaseApp::destroy() {
+/**
+ * @brief Cleans up resources before the application closes.
+ */
+void BaseApp::destroy() {
     m_engineGUI.destroy();
 }
 
-/* ======================= helper ======================= */
-void
-BaseApp::resetRace() {
-    /* reset actores a posiciones de inicio */
+/**
+ * @brief Resets the state of the race.
+ *
+ * This helper function restores actors to their starting positions
+ * and resets all race-related systems and flags.
+ */
+void BaseApp::resetRace() {
+    /* reset actors to initial positions */
     if (!m_player.isNull()) {
         m_player->setPosition(EngineMathLib::CVector2(880.f, 880.f));
     }
@@ -382,12 +427,11 @@ BaseApp::resetRace() {
         m_racerNPC->enableSteering(false);
     }
 
-    /* reconstruir sistemas que dependen de estado */
+    /* rebuild systems that depend on state */
     {
         WaypointFollowConfig wfc;
         wfc.racers = m_npcs;
         wfc.waypoints = &m_waypoints;
-
         wfc.arriveRadiusForAdvance = 22.f;
         wfc.reactionDelay = 0.14f;
         wfc.waypointNoiseRadius = 6.f;
@@ -407,23 +451,23 @@ BaseApp::resetRace() {
     {
         RaceConfig rc;
         rc.actors.clear();
-        if (!m_player.isNull())   rc.actors.push_back(m_player);
-        for (auto& npc : m_npcs)  rc.actors.push_back(npc);
+        if (!m_player.isNull()) rc.actors.push_back(m_player);
+        for (auto& npc : m_npcs) rc.actors.push_back(npc);
         rc.waypoints = &m_waypoints;
         rc.checkpointRadius = 12.f;
         m_raceSystem = EngineUtilities::MakeUnique<RaceSystem>(rc);
     }
 
-    /* reiniciar countdown y flags */
+    /* reset countdown and flags */
     m_countdown = RaceCountdown{ 3.f };
     m_countdown.start();
     m_raceArmed = true;
     m_raceLive = false;
     m_raceFinished = false;
     m_finalPlace = -1;
-    m_npcFinished = false; /* NEW */
+    m_npcFinished = false;
 
-    /* detener el cronometraje hasta el próximo GO */
+    /* stop timing until the next GO */
     if (!m_raceSystem.isNull()) {
         m_raceSystem->setTimingActive(false);
     }
