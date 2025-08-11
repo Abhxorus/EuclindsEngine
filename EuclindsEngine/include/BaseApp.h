@@ -15,13 +15,13 @@
 #include "ECS/Actor.h"
 #include <vector>
 #include "EngineGUI.h"
-#include "ECS/A_Racer.h"
+#include "ECS/Racer.h"
 
  /* Componentes y sistemas */
-#include "ECS/A_Player.h"
-#include "Systems/PlayerInputSystem.h"
+#include "ECS/Player.h"
+#include "Systems/InputSystem.h"
 #include "Systems/SteeringSystem.h"
-#include "Systems/WaypointFollowSystem.h"
+#include "Systems/WaypointSystem.h"
 #include "Systems/RaceSystem.h"
 #include "Components/RaceCountdown.h"
 

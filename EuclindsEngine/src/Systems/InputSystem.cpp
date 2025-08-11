@@ -7,7 +7,7 @@
  * y de búsqueda de objetivo (con el ratón).
  */
 
-#include "Systems/PlayerInputSystem.h"
+#include "Systems/InputSystem.h"
 #include "ECS/Transform.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>

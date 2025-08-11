@@ -81,13 +81,13 @@
     <ClCompile Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="A_Racer.cpp">
+    <ClCompile Include="Racer.cpp">
       <Filter>Archivos de origen\ECS</Filter>
     </ClCompile>
     <ClCompile Include="include\ActorSerializer.cpp">
       <Filter>Archivos de encabezado</Filter>
     </ClCompile>
-    <ClCompile Include="src\Systems\PlayerInputSystem.cpp">
+    <ClCompile Include="src\Systems\InputSystem.cpp">
       <Filter>Archivos de origen\Systems</Filter>
     </ClCompile>
     <ClCompile Include="src\Systems\RaceSystem.cpp">
@@ -176,7 +176,7 @@
     <ClInclude Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML_export.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\A_Racer.h">
+    <ClInclude Include="include\ECS\Racer.h">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities\EngineMath.h">
@@ -185,7 +185,7 @@
     <ClInclude Include="include\EngineGUI.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="include\ECS\A_Player.h">
+    <ClInclude Include="include\ECS\Player.h">
       <Filter>ECS</Filter>
     </ClInclude>
     <ClInclude Include="include\Circuits\Circuit1.h">
@@ -197,7 +197,7 @@
     <ClInclude Include="include\Components\lapComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="include\Systems\PlayerInputSystem.h">
+    <ClInclude Include="include\Systems\InputSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="include\Systems\RaceSystem.h">
@@ -206,7 +206,7 @@
     <ClInclude Include="include\Systems\SteeringSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="include\Systems\WaypointFollowSystem.h">
+    <ClInclude Include="include\Systems\WaypointSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="include\Systems\WaypointManager.h">

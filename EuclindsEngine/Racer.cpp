@@ -6,7 +6,7 @@
  * Contiene la lógica específica para el movimiento y comportamiento de los corredores.
  */
 
-#include "ECS/A_Racer.h"
+#include "ECS/Racer.h"
 #include "ECS/Transform.h"
 
  /**

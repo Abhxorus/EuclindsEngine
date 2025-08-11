@@ -1,6 +1,6 @@
 #pragma once
 #include "Prerequisitos.h"
-#include "ECS/A_Player.h"
+#include "ECS/Player.h"
 
 /**
  * @file PlayerInputSystem.h

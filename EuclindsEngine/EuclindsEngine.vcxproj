@@ -25,7 +25,7 @@
     <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_tables.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-1.92.1\imgui_widgets.cpp" />
     <ClCompile Include="..\ThirdParties\imgui-sfml-3.0\imgui-SFML.cpp" />
-    <ClCompile Include="A_Racer.cpp" />
+    <ClCompile Include="Racer.cpp" />
     <ClCompile Include="EngineGUI.cpp" />
     <ClCompile Include="include\ActorSerializer.cpp" />
     <ClCompile Include="src\BaseApp.cpp" />
@@ -33,7 +33,7 @@
     <ClCompile Include="src\ECS\Actor.cpp" />
     <ClCompile Include="src\maincpp.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
-    <ClCompile Include="src\Systems\PlayerInputSystem.cpp" />
+    <ClCompile Include="src\Systems\InputSystem.cpp" />
     <ClCompile Include="src\Systems\RaceSystem.cpp" />
     <ClCompile Include="src\Systems\SteeringSystem.cpp" />
     <ClCompile Include="src\Window.cpp" />
@@ -55,8 +55,8 @@
     <ClInclude Include="include\Components\RaceCountdown.h" />
     <ClInclude Include="include\CShape.h" />
     <ClInclude Include="include\ECS\Actor.h" />
-    <ClInclude Include="include\ECS\A_Player.h" />
-    <ClInclude Include="include\ECS\A_Racer.h" />
+    <ClInclude Include="include\ECS\Player.h" />
+    <ClInclude Include="include\ECS\Racer.h" />
     <ClInclude Include="include\ECS\Component.h" />
     <ClInclude Include="include\ECS\Entity.h" />
     <ClInclude Include="include\ECS\Texture.h" />
@@ -68,10 +68,10 @@
     <ClInclude Include="include\Memory\TWeakPointer.h" />
     <ClInclude Include="include\Prerequisitos.h" />
     <ClInclude Include="include\ResourceManager.h" />
-    <ClInclude Include="include\Systems\PlayerInputSystem.h" />
+    <ClInclude Include="include\Systems\InputSystem.h" />
     <ClInclude Include="include\Systems\RaceSystem.h" />
     <ClInclude Include="include\Systems\SteeringSystem.h" />
-    <ClInclude Include="include\Systems\WaypointFollowSystem.h" />
+    <ClInclude Include="include\Systems\WaypointSystem.h" />
     <ClInclude Include="include\Systems\WaypointManager.h" />
     <ClInclude Include="include\Utilities\CVector2.h" />
     <ClInclude Include="include\Utilities\CVector3.h" />
