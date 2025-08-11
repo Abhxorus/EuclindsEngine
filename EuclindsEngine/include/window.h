@@ -52,7 +52,7 @@ public:
 	 * @param color The color to clear the window with (default is opaque black).
 	 */
 	void
-		clear(const sf::Color& color = sf::Color(0, 0, 0, 255));
+		clear(const sf::Color& color = sf::Color(50, 50, 50, 255));
 
 	/**
 	 * @brief Draws a drawable object to the window.
