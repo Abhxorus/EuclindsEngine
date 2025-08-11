@@ -15,7 +15,6 @@
 #include <random>
 #include <algorithm>
 #include <cmath>
-
 #include "Prerequisitos.h"1
 #include "ECS/Racer.h"
 

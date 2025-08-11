@@ -6,7 +6,6 @@
  * Los actores son contenedores para diferentes componentes, como Transform y CShape,
  * que definen su comportamiento y apariencia.
  */
-
 #include "ECS/Actor.h"
 #include "ECS/Transform.h"
 #include "CShape.h"

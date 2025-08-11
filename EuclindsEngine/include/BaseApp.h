@@ -16,7 +16,6 @@
 #include <vector>
 #include "EngineGUI.h"
 #include "ECS/Racer.h"
-
  /* Componentes y sistemas */
 #include "ECS/Player.h"
 #include "Systems/InputSystem.h"

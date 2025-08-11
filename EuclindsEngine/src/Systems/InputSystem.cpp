@@ -6,7 +6,6 @@
  * y aplicarla a un actor, permitiendo dos modos de control: directo (con las teclas)
  * y de búsqueda de objetivo (con el ratón).
  */
-
 #include "Systems/InputSystem.h"
 #include "ECS/Transform.h"
 #include <SFML/Window/Keyboard.hpp>

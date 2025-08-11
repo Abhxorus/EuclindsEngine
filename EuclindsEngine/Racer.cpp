@@ -5,7 +5,6 @@
  * A_Racer es una subclase de Actor que representa a un corredor en el juego.
  * Contiene la lógica específica para el movimiento y comportamiento de los corredores.
  */
-
 #include "ECS/Racer.h"
 #include "ECS/Transform.h"
 
