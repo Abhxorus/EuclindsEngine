@@ -1,4 +1,13 @@
-﻿#pragma once
+﻿/**
+ * @file BaseApp.h
+ * @brief Define la clase principal de la aplicación, BaseApp.
+ *
+ * BaseApp es la clase central del motor. Se encarga de la gestión de la ventana,
+ * la creación y administración de actores, el bucle principal de la aplicación,
+ * la integración de la GUI y la coordinación de todos los sistemas del juego.
+ */
+
+#pragma once
 
 #include "Prerequisitos.h"
 #include "Window.h"
@@ -8,86 +17,116 @@
 #include "EngineGUI.h"
 #include "ECS/A_Racer.h"
 
-/* new */
+ /* Componentes y sistemas */
 #include "ECS/A_Player.h"
 #include "Systems/PlayerInputSystem.h"
 #include "Systems/SteeringSystem.h"
 #include "Systems/WaypointFollowSystem.h"
 #include "Systems/RaceSystem.h"
-#include "Components/RaceCountdown.h"      /* countdown (does not block Track or ImGui) */
+#include "Components/RaceCountdown.h"
 
-/*
+/**
  * @class BaseApp
- * @brief Main application class. Manages window, actors, main loop, and GUI panels.
+ * @brief Clase principal de la aplicación.
+ *
+ * Gestiona la ventana, los actores, el bucle principal, los paneles de la GUI
+ * y los sistemas de juego (entrada, dirección, carrera, etc.). Es el punto
+ * de orquestación de todo el motor.
  */
 class BaseApp {
 public:
-	BaseApp() = default;
-	~BaseApp();
+    /**
+     * @brief Constructor por defecto.
+     */
+    BaseApp() = default;
 
-	/*
-	 * @return Exit code (typically 0 if successful).
-	 */
-	int run();
+    /**
+     * @brief Destructor de la clase.
+     */
+    ~BaseApp();
 
-	/*
-	 * @return true if initialization was successful; false otherwise.
-	 */
-	bool init();
+    /**
+     * @brief Inicia el bucle principal de la aplicación.
+     * @return Código de salida (normalmente 0 si es exitoso).
+     */
+    int run();
 
-	/*
-	 * Updates the logic of the application each frame.
-	 */
-	void update();
+    /**
+     * @brief Inicializa la aplicación y sus componentes.
+     * @return `true` si la inicialización fue exitosa, `false` en caso contrario.
+     */
+    bool init();
 
-	/*
-	 * Renders the scene and GUI each frame.
-	 */
-	void render();
+    /**
+     * @brief Actualiza la lógica de la aplicación en cada fotograma.
+     */
+    void update();
 
-	/*
-	 * Cleans up resources used by the application.
-	 */
-	void destroy();
+    /**
+     * @brief Renderiza la escena y la interfaz gráfica de usuario en cada fotograma.
+     */
+    void render();
+
+    /**
+     * @brief Limpia y libera los recursos utilizados por la aplicación.
+     */
+    void destroy();
 
 private:
-	EngineUtilities::TSharedPointer<Window>   m_windowPtr;
-	EngineUtilities::TSharedPointer<Actor>    m_ACircle;
-	EngineUtilities::TSharedPointer<Actor>    m_ATrack;
-	EngineUtilities::TSharedPointer<A_Racer>  m_racerNPC;
+    /// Puntero a la ventana principal del motor.
+    EngineUtilities::TSharedPointer<Window> m_windowPtr;
 
-	/* Player and NPC list for systems */
-	EngineUtilities::TSharedPointer<A_Player> m_player;
-	std::vector<EngineUtilities::TSharedPointer<A_Racer>> m_npcs;
+    /// Punteros a los actores principales.
+    EngineUtilities::TSharedPointer<Actor> m_ACircle;
+    EngineUtilities::TSharedPointer<Actor> m_ATrack;
+    EngineUtilities::TSharedPointer<A_Racer> m_racerNPC;
 
-	std::vector<EngineUtilities::TSharedPointer<Actor>> actorsVector; /* All actors for easy GUI access */
-	EngineGUI m_engineGUI;
+    /// Puntero al jugador y lista de NPCs.
+    EngineUtilities::TSharedPointer<A_Player> m_player;
+    std::vector<EngineUtilities::TSharedPointer<A_Racer>> m_npcs;
 
-	std::vector<sf::Vector2f> m_waypoints; /* Waypoints for bots, player, etc. */
+    /// Vector de todos los actores para un fácil acceso por la GUI.
+    std::vector<EngineUtilities::TSharedPointer<Actor>> actorsVector;
 
-	/* === Systems (using TUniquePtr) === */
-	EngineUtilities::TUniquePtr<PlayerInputSystem>    m_playerInputSystem;
-	EngineUtilities::TUniquePtr<SteeringSystem>       m_steeringSystem;
-	EngineUtilities::TUniquePtr<WaypointFollowSystem> m_waypointFollowSystem;
-	EngineUtilities::TUniquePtr<RaceSystem>           m_raceSystem;
+    /// Instancia del sistema de GUI.
+    EngineGUI m_engineGUI;
 
-	/* === Race countdown (blocks ONLY player input and waypoint-follow until GO) === */
-	RaceCountdown m_countdown{ 3.f };
-	bool m_raceArmed = false;  /* countdown running */
-	bool m_raceLive = false;   /* GO! reached */
+    /// Puntos de ruta (waypoints) para los corredores.
+    std::vector<sf::Vector2f> m_waypoints;
 
-	/* === Meta de carrera === */
-	bool m_raceFinished = false;
-	int  m_finalPlace = -1;
-	int  m_lapsToWin = 3;
-	bool m_npcFinished = false; /* si el NPC termina antes, se congela; NO acaba la carrera */
+    /* === Sistemas (utilizando TUniquePtr) === */
+    EngineUtilities::TUniquePtr<PlayerInputSystem> m_playerInputSystem;
+    EngineUtilities::TUniquePtr<SteeringSystem> m_steeringSystem;
+    EngineUtilities::TUniquePtr<WaypointFollowSystem> m_waypointFollowSystem;
+    EngineUtilities::TUniquePtr<RaceSystem> m_raceSystem;
 
-	/* Shared base speed for initial setup */
-	float m_sharedMaxSpeed = 260.f;
+    /* === Cuenta atrás de la carrera === */
+    /// Componente de cuenta atrás antes de que comience la carrera.
+    RaceCountdown m_countdown{ 3.f };
+    /// Bandera que indica si la cuenta atrás está en curso.
+    bool m_raceArmed = false;
+    /// Bandera que indica si la carrera ha comenzado.
+    bool m_raceLive = false;
 
-	/* NPC handicap factor relative to player's max speed (1.0 = same speed) */
-	float m_npcSpeedFactor = 0.95f;    /* adjust 0.90–0.98 to taste */
+    /* === Meta de carrera === */
+    /// Bandera que indica si la carrera ha terminado.
+    bool m_raceFinished = false;
+    /// El lugar final del jugador en la carrera.
+    int m_finalPlace = -1;
+    /// Número de vueltas necesarias para ganar.
+    int m_lapsToWin = 3;
+    /// Bandera para congelar la lógica del NPC cuando termina.
+    bool m_npcFinished = false;
 
-	/* helper */
-	void resetRace();
+    /// Velocidad base compartida para la configuración inicial de los corredores.
+    float m_sharedMaxSpeed = 260.f;
+
+    /// Factor de hándicap para la velocidad del NPC en relación con el jugador (1.0 = misma velocidad).
+    float m_npcSpeedFactor = 0.95f;
+
+    /* === Funciones de ayuda === */
+    /**
+     * @brief Restablece el estado de la carrera a su valor inicial.
+     */
+    void resetRace();
 };
